@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GitHub|Profile</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet"> 
+
+	<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- Font Awesome -->
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+
+		<style type="text/css">
+			
+			#search
+			{
+				background-color:#1f1f14;
+				text-align: center;
+				width: 900px;
+				height: 90px;
+    			border: 2px solid #993300;
+    			padding: 25px;
+    			margin: 0 auto;
+    			border-radius: 10px;
+
+			}
+
+			body
+			{
+				background-color: #00802b;
+			}
+
+			h2
+			{
+				font-family: Bangers;
+				font-size: 40px;
+			}
+			
+			.viewMe
+			{
+				font-family: Passion One;
+			}
+
+			#image
+			{
+				height: 150px;
+				width : 150px;
+				border:8px solid #333300;
+				border-radius:5px;
+			}
+		</style>
+	
+		<script>
+		
+			function gitSearch()
+			{
+
+				var gitname = $('#proname').val();
+
+				$.ajax({
+
+					url : "https://api.github.com/users/" + gitname ,
+					type : "GET" , 
+					dataType : "text" ,
+					success : function( response , status , http ){
+						response = JSON.parse(response);
+
+						// To display the fetched response.
+
+						var outHtml = '<h2 class = "text-center viewMe">User Profile </h2>';
+
+						outHtml = outHtml + '<h2> Name: ' + response.name + '&nbsp &nbsp &nbsp ID : <a target= "_blank" href="' + response.html_url + '">' + response.login + '</a></h2>';
+
+						outHtml = outHtml + '<img id="image" src ="' + response.avatar_url + '" alt = "'+ response.login+'"> &nbsp&nbsp&nbsp&nbsp&nbsp <h2>Followers : '+response.followers+'&nbsp Following: '+response.following+'&nbsp&nbsp Repos : '+response.public_repos+'</h2>';
+
+
+
+
+
+
+						$('#gitdata').html(outHtml);
+
+					},
+					error : function( http , status , error ) {
+						alert( "Some Error Occured : " + error );
+					}
+				});
+
+			}		
+		</script>
+</head>
+<body class="text-center">
+
+<br>
+<h2>Github Profile View</h2>
+<br>
+<br>
+<br>
+<section class="text-center"  id="search">
+		<input type="text" name="proName" id = "proname" class="col-md-8" placeholder="Enter GitHub Username">
+		<button type="submit" class="btn btn-primary col-md-4" onclick="gitSearch()" >Search </button>
+</section>
+<br>
+<br>
+<br>
+<section id="gitdata">
+		
+</section>
+
+<!--Jquery  -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</body>
+</html>
