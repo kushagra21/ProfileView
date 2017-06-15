@@ -1,6 +1,3 @@
-Hello Everyone,
-
-
 ProfileView is a basic web application with a functionality of fetching the user data of the profile id provided in the search box.
 
 It uses the concept of AJAX and jQuery to perform the desired action.
